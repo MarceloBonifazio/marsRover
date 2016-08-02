@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="robots" content="noindex">
+		<title>MarsRover</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="images/icon.ico" rel="shortcut icon">
+		<link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="css/bootstrap-select.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="css/index.css" rel="stylesheet">
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-select.js"></script>
+		<script src="js/index.js" defer></script>
+	</head>
+	<body>
+		<div style="padding-left: 30%;" id="formulario">
+			<div class="container">
+				<div class="row input">
+					<div class="col-xs-12">
+						<h1>A sonda de Marte</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 tab-container">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 tab-menu">
+						  <div class="list-group">
+							<a class="list-group-item active text-center" id="inicio">
+								Opções iniciais 
+							</a>
+							<a class="list-group-item text-center disabled" id="teste">
+								Teste automatizado
+							</a>
+							<a class="list-group-item text-center disabled" id="campo">
+								Dados do campo
+							</a>	
+							<a class="list-group-item text-center disabled" id="sonda">
+								Dados da sonda
+							</a>
+							<a class="list-group-item text-center">
+								Informações da aplicação
+							</a>
+						  </div>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 tab">
+							<div class="tab-content active">
+								<center>
+									<p class="help-block">Selecione SIM, caso queira fazer um teste automatizado.</p>
+									<div id="radioBtn" class="btn-group">
+										<a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="S" onclick="automatico('S')">Sim</a>
+										<a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="N" onclick="automatico('N')">Não</a>
+									</div>
+									</br></br></br></br>
+									</br></br></br></br>
+									</br>
+									<p class="help-block">Vá para “informações da aplicação” para mais informações sobre o teste automático.</p>
+								</center>
+							</div>
+							<div class="tab-content">
+								<center>
+									<div class="col-md-12 centralize">
+										<textarea class="form-control" rows="4" id="input" style="resize: none;">Comandos.....</textarea>
+									</div>
+									<div class="col-md-12 centralize">
+										<input class="btn btn-lg btn-primary btn-block" value="Reiniciar" onclick="location.reload();" type="button">
+									</div>
+									<div class="col-md-12 centralize">
+										<input class="btn btn-lg btn-primary btn-block" value="Avançar" onclick="testeAutomatico();" type="button">
+									</div>
+								</center>
+							</div>
+							<div class="tab-content">
+								<center>
+								  	<div class="col-md-12">
+										<p class="help-block">Entre com a quantidade de colunas do campo</p>
+										<div class="input-group spinner">
+											<input type="text" id="qtdColunas" class="form-control" value="1" min="1" max="25">
+											<div class="input-group-btn-vertical">
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<p class="help-block">Entre com a quantidade de linhas do campo</p>
+										<div class="input-group spinner">
+											<input type="text" id="qtdLinhas" class="form-control" value="1" min="1" max="25">
+											<div class="input-group-btn-vertical">
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 centralize">
+										<input class="btn btn-lg btn-primary btn-block" value="Reiniciar" onclick="location.reload();" type="button">
+									</div>
+									<div class="col-md-12 centralize">
+										<input id="definirCampo" class="btn btn-lg btn-primary btn-block" value="Avançar" onclick="definir('campo');" type="button">
+									</div>
+								</center>
+							</div>							
+							<div class="tab-content">
+								<center>
+									<div class="col-md-12">
+										<p class="help-block">Entre com a coluna inicial da sonda</p>
+										<div class="input-group spinner">
+											<input type="text" id="colunaSonda" class="form-control" value="1" min="1" max="25">
+											<div class="input-group-btn-vertical">
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<p class="help-block">Entre com a linha inicial da sonda</p>
+										<div class="input-group spinner">
+											<input type="text" id="linhaSonda" class="form-control" value="1" min="1" max="25">
+											<div class="input-group-btn-vertical">
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+												<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<p class="help-block">Indique a orientação inicial da sonda</p>
+										<select id="orientacaoSonda" class="selectpicker show-tick form-control">
+											<option value="N" data-subtext="North">Norte</option>
+											<option value="E" data-subtext="East">Leste</option>
+											<option value="S" data-subtext="South" selected>Sul</option>
+											<option value="W" data-subtext="West">Oeste</option>
+										</select>
+									</div>
+									<div class="col-md-12 centralize">
+										<input class="btn btn-lg btn-primary btn-block" value="Reiniciar" onclick="location.reload();" type="button">
+									</div>
+									<div class="col-md-12 centralize">
+										<input id="definirSonda" class="btn btn-lg btn-primary btn-block" value="Avançar" onclick="definir('sonda');" type="button">
+									</div>									
+								</center>
+							</div>
+							<div class="tab-content">
+								<center>
+									<div class="col-md-12 centralize">
+										<iframe id="texto" src="readme.txt" height="100%"></iframe>
+									</div>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="marsRover">
+			<div class="col-md-12">
+				<div class="alert alert-info">
+					<div id="canvas-container">
+					   <canvas id="arena" width="600" height="500"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 centralize">
+				<div id="output"></div>
+			</div>
+			<div id="controles">
+				<div class="col-md-4 centralize">
+					<input id="direita" class="btn btn-lg btn-primary btn-block" value="Girar para direita" onclick="funcao('R');" type="button">
+				</div>								  	
+				<div class="col-md-4 centralize">
+					<input id="esquerda" class="btn btn-lg btn-primary btn-block" value="Girar para esquerda" onclick="funcao('L');" type="button">
+				</div>								  	
+				<div class="col-md-4 centralize">
+					<input class="btn btn-lg btn-primary btn-block" value="Mover" onclick="funcao('M');" type="button">
+				</div>
+			</div>
+			<div class="col-md-12 centralize">
+				<input class="btn btn-lg btn-primary btn-block" value="Reiniciar" onclick="location.reload();" type="button">
+			</div>
+		</div>
+	</body>
+</html>
