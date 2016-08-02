@@ -44,12 +44,15 @@ function testeAutomatico(){
 	}
 	
 	comando = input.split("\n");
+	
+	comando = limparArray(comando);
+	
 	arena = comando.shift().split(" ");	
 	qtdColunas = arena.shift();
 	qtdLinhas = arena.shift();
 	
 	if((qtdLinhas > 25) || (qtdColunas > 25) || (qtdLinhas < 1) || (qtdColunas < 1)){
-		alert("Tamanho da arena deve ser entre 1 e 25 tanto para coluna quanto para linha.");
+		alert("Quantidade de colunas e de linhas deve ser maior que 1 e menor que 25.");
 		return;
 	}
 	
@@ -60,7 +63,9 @@ function testeAutomatico(){
 	var sonda = new Array(comando.length/2)
 	for (i = 0; i <= comando.length/2; i++){
 		posicaoSonda = comando.shift().split(" ");
+		posicaoSonda = limparArray(posicaoSonda);
 		movimentoSonda = comando.shift().split("");
+		movimentoSonda = limparArray(movimentoSonda);
 		sonda[i] = new Array("sonda"+i, posicaoSonda, movimentoSonda);
 	}
 	
@@ -71,16 +76,16 @@ function testeAutomatico(){
 		if(testaSonda()){
 			for (l = 0; l < sonda[k][2].length; l++){
 				funcao(sonda[k][2][l]);
-				montarArena();
 			}
+			montarArena();
 			alert("A posi\u00e7\u00e3o final da sonda \u00e9:\nColuna: " + sondaColuna + " Linha: " + sondaLinha + " Orienta\u00e7\u00e3o: " + orientacaoSonda);
 		}
-	}	
+	}
 }
 
 function testaSonda(){
 	if((sondaColuna > qtdColunas) || (sondaLinha > qtdLinhas) || (sondaColuna < 1) || (sondaLinha < 1)){
-		alert("A sonda deve ser posicionada dentro da arena! ");
+		alert("A sonda deve ser posicionada dentro da arena!");
 		return false;
 	}else{
 		return true;
@@ -152,8 +157,8 @@ function montarArena(){
 }
 
 function posicionarSonda(context, tamanho, y, x){
-	posX = x - tamanho - (1/qtdColunas);
-	posY = y - tamanho - (1/qtdLinhas);
+	posX = x - tamanho;
+	posY = y - tamanho;
 	
 	var angulo = orientacaoSonda === 'N' ? 0 : orientacaoSonda === 'E' ? 90 : orientacaoSonda === 'S' ? 180 : 270;
 	
@@ -183,6 +188,16 @@ function mover(){
 	orientacaoSonda === 'E' ? (sondaColuna == qtdColunas ? console.log("Imposs\u00edvel realizar o movimento.") : sondaColuna++ ) : 
 	orientacaoSonda === 'S' ? (sondaLinha == qtdLinhas ? console.log("Imposs\u00edvel realizar o movimento.") : sondaLinha++ )	: 
 	(sondaColuna == 1 ? console.log("Imposs\u00edvel realizar o movimento.") : sondaColuna-- );
+}
+
+function limparArray(atual) {
+	var novoArray = new Array();
+	for (var i = 0; i < atual.length; i++) {
+		if (atual[i]) {
+			novoArray.push(atual[i]);
+		}
+	}
+	return novoArray;
 }
 
 function resetar(form){
