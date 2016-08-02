@@ -25,26 +25,42 @@ Projeto não necesita de instalação, basta executar o aquivo `index.html`.
 
 # EXEMPLOS DE ENTRADA:
 `1.`
+
 5 5
+
 1 2 N
+
 LMLMLMLMM
+
 3 3 E
+
 MMRMMRMRRM
 
+
 `2.`
+
 9 9
+
 5 2 N
+
 LLMLLMRMLMMM
+
 3 8 W
+
 MMLMLMMMRM
 
 # EXEMPLOS DE SAÍDA:
 `1.`
+
 3 5 E
+
 5 1 W
 
+
 `2.`
+
 6 1 N
+
 4 9 S
 
 
